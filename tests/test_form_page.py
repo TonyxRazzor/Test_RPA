@@ -20,7 +20,8 @@ def setup_and_teardown():
     # Закрытие браузера после теста
     driver.quit()
 
-def test_fill_form(setup_and_teardown):
+@pytest.mark.parametrize("test_name", ["Заполнение формы"])
+def test_fill_form(setup_and_teardown, test_name):
     # Подготовка данных для теста
     test_data = {
         'First Name': 'John',
@@ -35,18 +36,18 @@ def test_fill_form(setup_and_teardown):
     # Заполнение формы тестовыми данными
     setup_and_teardown.fill_form(test_data)
 
+@pytest.mark.parametrize("test_name", ["Проверка совместимости сайта"])
 @pytest.mark.parametrize("url, expected_result", [
     (FORM_URL, True),
     ("https://www.google.com/", False),
-])
-
-
-def test_website_compatibility(setup_and_teardown, url, expected_result):
+], ids=["test_website_compatibility_form", "test_website_compatibility_google"])
+def test_website_compatibility(setup_and_teardown, url, expected_result, test_name):
     setup_and_teardown.driver.get(url)
     page_title = setup_and_teardown.driver.title
     assert page_title != "", "Page title is empty, page might not have loaded correctly"
 
-def test_multiple_fields_presence(setup_and_teardown):
+@pytest.mark.parametrize("test_name", ["Проверка наличия полей"])
+def test_multiple_fields_presence(setup_and_teardown, test_name):
     # Словарь с данными для каждого поля
     test_data2 = {
         'labelEmail': 'test.email@example.com',

@@ -38,7 +38,7 @@ class FormPage:
         last_name_element = wait.until(EC.presence_of_element_located((By.XPATH, '//input[@ng-reflect-name="labelLastName"]')))
         last_name_element.send_keys(data['Last Name'])
 
-        # добавить задержку для визуальной проверки
+        # Добавляем задержку для визуальной проверки
         time.sleep(3)
 
         # Нажатие на кнопку отправки
