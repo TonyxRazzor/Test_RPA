@@ -8,3 +8,6 @@ def read_excel_data(file_path):
     data = df.to_dict('records')
     return data
 
+def clean_keys(data):
+    """Удаляет пробелы в начале и конце каждого ключа в словаре."""
+    return {k.strip(): v for k, v in data.items()}
